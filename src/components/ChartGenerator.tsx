@@ -18,7 +18,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon, Sparkles } from 'lucide-react';
+import { BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon, Sparkles, Download } from 'lucide-react';
+import { ExportModal } from './ExportModal';
 
 interface ChartGeneratorProps {
   data: any[];
@@ -304,13 +305,31 @@ export const ChartGenerator = ({ data, fileName }: ChartGeneratorProps) => {
       {/* Chart Display */}
       <Card className="shadow-medium">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
-            Your Chart
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-primary" />
+              Your Chart
+            </div>
+            <ExportModal fileName={fileName || 'chart'} chartContainerId="chart-container">
+              <Button variant="gradient" size="sm" className="gap-2">
+                <Download className="h-4 w-4" />
+                Export
+              </Button>
+            </ExportModal>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {renderChart()}
+          <div id="chart-container" className="bg-white rounded-lg p-6">
+            <div className="mb-4 text-center">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {fileName ? `${fileName} - ${selectedChart.charAt(0).toUpperCase() + selectedChart.slice(1)} Chart` : 'Data Visualization'}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {xColumn && yColumn ? `${xColumn} vs ${yColumn}` : 'Chart Analysis'}
+              </p>
+            </div>
+            {renderChart()}
+          </div>
         </CardContent>
       </Card>
 
