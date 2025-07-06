@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { Upload, FileSpreadsheet, AlertCircle } from 'lucide-react';
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
+import { XMLParser } from 'fast-xml-parser';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -60,6 +61,62 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
     reader.readAsArrayBuffer(file);
   };
 
+  const parseJSON = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const jsonData = JSON.parse(e.target?.result as string);
+        let dataArray = Array.isArray(jsonData) ? jsonData : [jsonData];
+        
+        // Limit to 100 rows for performance
+        const limitedData = dataArray.slice(0, 100);
+        onDataParsed(limitedData, file.name);
+        setIsUploading(false);
+      } catch (err) {
+        setError('Failed to parse JSON file: Invalid JSON format');
+        setIsUploading(false);
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const parseXML = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parser = new XMLParser({
+          ignoreAttributes: false,
+          attributeNamePrefix: "@_"
+        });
+        const xmlData = parser.parse(e.target?.result as string);
+        
+        // Try to find array data in XML structure
+        let dataArray = [];
+        if (Array.isArray(xmlData)) {
+          dataArray = xmlData;
+        } else {
+          // Look for common root elements that might contain arrays
+          const possibleArrays = Object.values(xmlData).filter(Array.isArray);
+          if (possibleArrays.length > 0) {
+            dataArray = possibleArrays[0] as any[];
+          } else {
+            // If no arrays found, wrap the data in an array
+            dataArray = [xmlData];
+          }
+        }
+        
+        // Limit to 100 rows for performance
+        const limitedData = dataArray.slice(0, 100);
+        onDataParsed(limitedData, file.name);
+        setIsUploading(false);
+      } catch (err) {
+        setError('Failed to parse XML file: Invalid XML format');
+        setIsUploading(false);
+      }
+    };
+    reader.readAsText(file);
+  };
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (!file) return;
@@ -85,8 +142,12 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
       parseCSV(file);
     } else if (fileExtension === 'xlsx' || fileExtension === 'xls') {
       parseExcel(file);
+    } else if (fileExtension === 'json') {
+      parseJSON(file);
+    } else if (fileExtension === 'xml') {
+      parseXML(file);
     } else {
-      setError('Please upload a CSV or Excel (.xlsx, .xls) file');
+      setError('Please upload a CSV, Excel (.xlsx, .xls), JSON (.json), or XML (.xml) file');
       setIsUploading(false);
       clearInterval(progressInterval);
     }
@@ -97,7 +158,10 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
     accept: {
       'text/csv': ['.csv'],
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
-      'application/vnd.ms-excel': ['.xls']
+      'application/vnd.ms-excel': ['.xls'],
+      'application/json': ['.json'],
+      'text/xml': ['.xml'],
+      'application/xml': ['.xml']
     },
     multiple: false
   });
@@ -157,7 +221,7 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
               </div>
               
               <div className="text-sm text-muted-foreground space-y-1">
-                <p>Supports CSV, XLSX, and XLS files</p>
+                <p>Supports CSV, XLSX, XLS, JSON, and XML files</p>
                 <p>Maximum 100 rows for optimal performance</p>
               </div>
             </div>
