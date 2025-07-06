@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -61,7 +62,33 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// DataStory.AI Brand Colors
+				brand: {
+					purple: 'hsl(var(--brand-purple))',
+					blue: 'hsl(var(--brand-blue))'
+				},
+				// Chart Colors
+				chart: {
+					1: 'hsl(var(--chart-1))',
+					2: 'hsl(var(--chart-2))',
+					3: 'hsl(var(--chart-3))',
+					4: 'hsl(var(--chart-4))',
+					5: 'hsl(var(--chart-5))'
 				}
+			},
+			backgroundImage: {
+				'brand-gradient': 'var(--brand-gradient)',
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+			},
+			boxShadow: {
+				'soft': 'var(--shadow-soft)',
+				'medium': 'var(--shadow-medium)',
+				'glow': 'var(--shadow-glow)',
+			},
+			transitionTimingFunction: {
+				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

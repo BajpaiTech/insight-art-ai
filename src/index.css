@@ -2,39 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* DataStory.AI Design System - Professional data visualization theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 250 84% 54%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 250 84% 64%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 250 100% 95%;
+    --accent-foreground: 250 84% 54%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 250 84% 54%;
+
+    /* DataStory.AI Brand Colors */
+    --brand-purple: 250 84% 54%;
+    --brand-blue: 220 91% 65%;
+    --brand-gradient: linear-gradient(135deg, hsl(250 84% 54%), hsl(220 91% 65%));
+    
+    /* Chart Colors */
+    --chart-1: 250 84% 54%;
+    --chart-2: 220 91% 65%;
+    --chart-3: 280 65% 60%;
+    --chart-4: 200 80% 55%;
+    --chart-5: 340 75% 55%;
+    
+    /* Shadows & Effects */
+    --shadow-soft: 0 4px 12px -2px hsl(220 13% 18% / 0.08);
+    --shadow-medium: 0 8px 25px -5px hsl(220 13% 18% / 0.12);
+    --shadow-glow: 0 0 30px hsl(250 84% 54% / 0.15);
+    
+    /* Animations */
+    --animation-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
