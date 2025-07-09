@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { DataUpload } from '@/components/DataUpload';
 import { DataPreview } from '@/components/DataPreview';
 import { ChartGenerator } from '@/components/ChartGenerator';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 type Step = 'upload' | 'preview' | 'generate' | 'export';
 
@@ -53,11 +54,14 @@ const Index = () => {
               </div>
             </div>
             
-            {uploadedData.length > 0 && (
-              <Button variant="outline" onClick={handleStartOver}>
-                Start Over
-              </Button>
-            )}
+            <div className="flex items-center space-x-3">
+              <ThemeToggle />
+              {uploadedData.length > 0 && (
+                <Button variant="outline" onClick={handleStartOver}>
+                  Start Over
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </header>

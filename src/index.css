@@ -78,23 +78,24 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 228 18% 15%;
-    --foreground: 45 37% 91%;
+    --background: 210 45% 8%;
+    --foreground: 240 7% 23%;
 
-    --card: 228 18% 20%;
-    --card-foreground: 45 37% 91%;
+    --card: 210 45% 12%;
+    --card-foreground: 240 7% 23%;
 
-    --popover: 228 18% 20%;
-    --popover-foreground: 45 37% 91%;
+    --popover: 210 45% 12%;
+    --popover-foreground: 240 7% 23%;
 
     --primary: 15 69% 62%;
     --primary-foreground: 45 37% 91%;
+    --primary-glow: 15 69% 72%;
 
-    --secondary: 228 15% 25%;
+    --secondary: 210 35% 15%;
     --secondary-foreground: 45 37% 91%;
 
-    --muted: 228 15% 25%;
-    --muted-foreground: 45 20% 70%;
+    --muted: 210 35% 15%;
+    --muted-foreground: 45 37% 91%;
 
     --accent: 15 45% 30%;
     --accent-foreground: 15 69% 62%;
@@ -102,16 +103,29 @@ All colors MUST be HSL.
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 45 37% 91%;
 
-    --border: 228 15% 35%;
-    --input: 228 15% 35%;
+    --border: 240 7% 23%;
+    --input: 210 35% 15%;
     --ring: 15 69% 62%;
-    --sidebar-background: 228 18% 15%;
-    --sidebar-foreground: 45 37% 91%;
+
+    /* DataStory.AI Brand Colors - Dark Mode */
+    --brand-purple: 15 69% 62%;
+    --brand-blue: 15 69% 72%;
+    --brand-gradient: linear-gradient(135deg, hsl(15 69% 62%), hsl(15 69% 72%));
+    
+    /* Chart Colors - Dark Mode */
+    --chart-1: 15 69% 62%;
+    --chart-2: 15 69% 72%;
+    --chart-3: 25 69% 65%;
+    --chart-4: 35 69% 60%;
+    --chart-5: 5 69% 58%;
+
+    --sidebar-background: 210 45% 8%;
+    --sidebar-foreground: 240 7% 23%;
     --sidebar-primary: 15 69% 62%;
     --sidebar-primary-foreground: 45 37% 91%;
-    --sidebar-accent: 228 15% 25%;
+    --sidebar-accent: 210 35% 15%;
     --sidebar-accent-foreground: 45 37% 91%;
-    --sidebar-border: 228 15% 35%;
+    --sidebar-border: 240 7% 23%;
     --sidebar-ring: 15 69% 62%;
   }
 }
