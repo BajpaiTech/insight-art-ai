@@ -26,8 +26,8 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
         if (results.errors.length > 0) {
           setError('Error parsing CSV: ' + results.errors[0].message);
         } else {
-          // Limit to 100 rows for performance
-          const limitedData = results.data.slice(0, 100);
+          // Limit to 2000 rows for performance
+          const limitedData = results.data.slice(0, 2000);
           onDataParsed(limitedData, file.name);
         }
         setIsUploading(false);
@@ -49,8 +49,8 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         
-        // Limit to 100 rows for performance
-        const limitedData = jsonData.slice(0, 100);
+        // Limit to 2000 rows for performance
+        const limitedData = jsonData.slice(0, 2000);
         onDataParsed(limitedData, file.name);
         setIsUploading(false);
       } catch (err) {
@@ -68,8 +68,8 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
         const jsonData = JSON.parse(e.target?.result as string);
         let dataArray = Array.isArray(jsonData) ? jsonData : [jsonData];
         
-        // Limit to 100 rows for performance
-        const limitedData = dataArray.slice(0, 100);
+        // Limit to 2000 rows for performance
+        const limitedData = dataArray.slice(0, 2000);
         onDataParsed(limitedData, file.name);
         setIsUploading(false);
       } catch (err) {
@@ -105,8 +105,8 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
           }
         }
         
-        // Limit to 100 rows for performance
-        const limitedData = dataArray.slice(0, 100);
+        // Limit to 2000 rows for performance
+        const limitedData = dataArray.slice(0, 2000);
         onDataParsed(limitedData, file.name);
         setIsUploading(false);
       } catch (err) {
@@ -125,16 +125,16 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
     setIsUploading(true);
     setUploadProgress(0);
 
-    // Simulate upload progress
+    // Simulate upload progress with slower progression for larger files
     const progressInterval = setInterval(() => {
       setUploadProgress(prev => {
-        if (prev >= 90) {
+        if (prev >= 85) {
           clearInterval(progressInterval);
-          return 90;
+          return 85;
         }
-        return prev + 10;
+        return prev + 5;
       });
-    }, 100);
+    }, 150);
 
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     
@@ -222,7 +222,7 @@ export const DataUpload = ({ onDataParsed }: DataUploadProps) => {
               
               <div className="text-sm text-muted-foreground space-y-1">
                 <p>Supports CSV, XLSX, XLS, JSON, and XML files</p>
-                <p>Maximum 100 rows for optimal performance</p>
+                <p>Supports up to 2000 rows. Larger files may take slightly longer to process.</p>
               </div>
             </div>
           )}

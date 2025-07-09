@@ -47,7 +47,7 @@ export const DataPreview = ({ data, fileName }: DataPreviewProps) => {
         </CardTitle>
         <CardDescription>
           {data.length} rows × {columns.length} columns
-          {data.length >= 100 && ' (limited to 100 rows for performance)'}
+          {data.length >= 2000 && ' (limited to 2000 rows for performance)'}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
